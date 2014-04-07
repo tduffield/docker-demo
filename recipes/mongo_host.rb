@@ -1,3 +1,5 @@
+chef_gem 'chef_metal_docker'
+
 require 'chef_metal_docker'
 with_provisioner ChefMetalDocker::DockerProvisioner.new
 
@@ -8,7 +10,6 @@ base_port = 27020
 
   machine "mongodb#{i}" do
     provisioner_options 'base_image' => 'ubuntu:latest',
-      'command' => 'chef-client -o mongodb::replicaset',
       'container_options' => {
         :port => "#{port}:#{port}",
         :env => [
