@@ -1,5 +1,3 @@
-include_recipe 'supervisor'
-
 supervisor_service "sshd" do
   command "/usr/bin/sshd -d"
   stdout_logfile "/var/log/supervisor/%(program_name)s.log"
