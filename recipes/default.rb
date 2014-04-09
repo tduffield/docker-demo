@@ -6,3 +6,6 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+
+include_recipe 'docker-demo::vagrant'
+include_recipe 'docker-demo::mongo_cluster'
