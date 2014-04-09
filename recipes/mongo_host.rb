@@ -11,54 +11,53 @@ with_provisioner ChefMetalDocker::DockerProvisioner.new
 
 base_port = 27020
 
+machine 'base' do
+  provisioner_options 'base_image' => 'ubuntu:12.04',
+    'command' => false
+  run_list %w(recipe[apt] recipe[build-essential] recipe[openssh] recipe[supervisor])
+end
+
 #machine "mongodb" do
-#  provisioner_options 'base_image' => 'ubuntu:latest',
+#  provisioner_options 'base_image' => 'base_image:latest',
 #  'command' => false,
 #  'container_options' => {
 #    'ExposedPorts' => {
 #      "#{port}/tcp" => {}
-#    },
-#    'host_options' => {
-#      'PortBindings' => {
-#        "#{port}/tcp" => [{ "HostPort" => port }]
-#      }
 #    }
+#  },
+#  'host_options' => {
+#     'PortBindings' => {
+#        "#{port}/tcp" => [{ "HostPort" => port }]
+#     }
 #  }
-#  recipe 'docker-demo::mongodb'
-#  recipe 'docker-demo::supervisor'
-#  recipe 'mongodb::replicaset'
-#  attribute %w(mongodb install_method), "10gen"
-#  complete true
+#  run_list %w(docker-demo::supervisor mongodb::replicaset)
 #end
 
-1.upto(2) do |i|
+1.upto(1) do |i|
   port = base_port + i
 
   machine "mongodb#{i}" do
-    #provisioner_options 'base_image' => 'mongodb_image:latest',
-    provisioner_options 'base_image' => 'ubuntu:latest',
-    #'command' => 'mongod -f /etc/mongodb.conf',
+    provisioner_options 'base_image' => 'base_image:latest',
     'command' => 'supervisord -n',
-    'container_options' => {
+    'container_configuration' => {
       'ExposedPorts' => {
-        "#{port}/tcp" => {}
+        "#{port}/tcp" => {},
+        "22/tcp" => {}
       },
-      'host_options' => {
-        'PortBindings' => {
-          "#{port}/tcp" => [{ "HostPort" => port }]
-        }
+      'Tty' => true
+    },
+    'host_configuration' => {
+      'PortBindings' => {
+        "#{port}/tcp" => [{ "HostPort" => "#{port}" }],
+        "22/tcp" => [{"HostIp" => "127.0.0.1", "HostPort" => "#{22000 + i}"}]
       }
     }
-    recipe 'docker-demo::mongodb'
-    recipe 'openssh'
-    recipe 'docker-demo::supervisor'
-    recipe 'mongodb::replicaset'
-    attribute %w(mongodb install_method), "10gen"
+    #run_list %w(recipe[mongodb::replicaset])
+    run_list %w(recipe[docker-demo::supervisor] recipe[mongodb::replicaset])
     attribute %w(mongodb cluster_name), "docker"
-    #attribute %w(mongodb server host), node['ipaddress']
     attribute %w(mongodb config replSet), "docker"
     attribute %w(mongodb server host), "172.17.42.1"
     attribute %w(mongodb config port), port
-    complete true
+    converge true
   end
 end
