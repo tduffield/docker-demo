@@ -7,5 +7,5 @@ berks install
 berks upload --force
 #sudo chef-client -c ~/.chef/knife.rb recipes/vagrant.rb recipes/mongo_cluster.rb
 #chef-client -z recipes/vagrant.rb recipes/mongo_cluster.rb
-chef-client -z recipes/mongo_host.rb
+chef-client -z recipes/mongo_host.rb -l debug 
 #sudo chef-client -c ~/.chef/knife.rb -o recipe[docker-demo::mongo_host]
