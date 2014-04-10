@@ -14,5 +14,8 @@ source 'https://rubygems.org'
 #   gem "vagrant-omnibus", github: "schisamo/vagrant-omnibus"
 # end
 
+gem 'chef'
+gem 'chef-metal'
+gem 'chef-metal-docker'
 gem 'test-kitchen'
 #gem 'kitchen-vagrant'
