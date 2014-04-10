@@ -7,5 +7,5 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe 'docker-demo::vagrant'
-include_recipe 'docker-demo::mongo_cluster'
+include_recipe 'docker-demo::image_factory'
+include_recipe 'docker-demo::mongo_host'
