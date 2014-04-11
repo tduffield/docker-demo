@@ -42,12 +42,14 @@ please follow the instructions here: [Docker Installation Documentation](https:/
 You can confirm if your cluster is working by SSH-ing into a container. To do this, first SSH
 into boot2docker by running `boot2docker ssh`. The password is tcuser. Then, you can ssh into any one
 of the Docker containers currently running. To see the running containers, run `docker ps`. 
+
     CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS                                               NAMES
     fa37ebf284ae        mongodb5_image:latest   supervisord -n      2 minutes ago       Up 2 minutes        127.0.0.1:22005->22/tcp, 0.0.0.0:27025->27025/tcp   mongodb5
     deefc7b18996        mongodb4_image:latest   supervisord -n      3 minutes ago       Up 3 minutes        127.0.0.1:22004->22/tcp, 0.0.0.0:27024->27024/tcp   mongodb4
     4c6761032a8c        mongodb3_image:latest   supervisord -n      3 minutes ago       Up 3 minutes        127.0.0.1:22003->22/tcp, 0.0.0.0:27023->27023/tcp   mongodb3
     6e5b6c53f8c2        mongodb2_image:latest   supervisord -n      4 minutes ago       Up 4 minutes        127.0.0.1:22002->22/tcp, 0.0.0.0:27022->27022/tcp   mongodb2
     da2561522ae2        mongodb1_image:latest   supervisord -n      5 minutes ago       Up 5 minutes        127.0.0.1:22001->22/tcp, 0.0.0.0:27021->27021/tcp   mongodb1
+
 You can see in this printout that we are forwarding port 22 in the container to another port on the host. 
 Specify that port when you are SSH-ing into the container as the docker user. 
 
