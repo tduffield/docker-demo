@@ -11,7 +11,7 @@ end
 # to base_image.
 machine 'dockerdemo_base' do
   provisioner_options 'base_image' => 'ubuntu:latest', 'command' => false
-  #recipe 'apt'
+  recipe 'apt'
   recipe 'build-essential'
   recipe 'openssh'
   recipe 'supervisor'
@@ -23,6 +23,4 @@ machine 'dockerdemo_mongodb_base' do
   provisioner_options 'base_image' => 'dockerdemo_base_image', 'command' => false
   recipe 'docker-demo::supervisor'
   recipe 'mongodb::install'
-  #attribute %w(mongodb cluster_name), "docker"
-  #attribute %w(mongodb config replSet), "docker"
 end
