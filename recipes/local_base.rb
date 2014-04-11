@@ -2,7 +2,7 @@ require 'chef_metal_docker'
 with_provisioner ChefMetalDocker::DockerProvisioner.new
 
 # Connect to my Chef Server
-with_chef_server "https://ec2-54-224-52-189.compute-1.amazonaws.com/organizations/chef", {
+with_chef_server ENV['DOCKER_CHEF_SERVER'], {
   :client_name => Chef::Config[:node_name],
   :signing_key_filename => Chef::Config[:client_key]
 }
