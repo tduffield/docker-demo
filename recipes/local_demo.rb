@@ -3,8 +3,8 @@ with_provisioner ChefMetalDocker::DockerProvisioner.new
 
 # Connect to my Chef Server
 with_chef_server ENV['DOCKER_CHEF_SERVER'], {
-  :client_name => Chef::Config[:node_name],
-  :signing_key_filename => Chef::Config[:client_key]
+  :client_name => chef::config[:node_name],
+  :signing_key_filename => chef::config[:client_key]
 }
 
 base_port = 27020

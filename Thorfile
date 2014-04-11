@@ -49,6 +49,13 @@ class Demo < Thor
     )
   end
 
+  desc 'ec2', 'Launch EC2 demo'
+  def ec2
+    exec %Q(
+      chef-client -z recipes/ec2.rb recipes/provisioner.rb   
+    )
+  end
+
   desc 'cleanup', 'Cleanup your environment'
   def cleanup
     exec %Q(

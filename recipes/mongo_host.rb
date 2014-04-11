@@ -6,8 +6,8 @@ base_port = 27020
 1.upto(2) do |i|
   port = base_port + i
 
-  machine "dockerdemo_mongodb#{i}" do
-    provisioner_options 'base_image' => 'dockerdemo_mongodb_base_image',
+  machine "mongodb#{i}" do
+    provisioner_options 'base_image' => 'mongodb_base_image',
       #
       # Run the supervisor permanently after converge
       #

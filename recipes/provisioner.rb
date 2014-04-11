@@ -1,7 +1,8 @@
 machine 'provisioner' do
+  file '/etc/chef/validation.pem', "#{ENV['HOME']}/.chef/chef-validator.pem"
   recipe 'apt'
   recipe 'build-essential'
-  recipe 'git'
+  #recipe 'git'
 end
 
 machine 'provisioner' do
