@@ -1,13 +1,19 @@
 require 'chef_metal_docker'
 with_provisioner ChefMetalDocker::DockerProvisioner.new
 
+# Connect to my Chef Server
+with_chef_server "https://ec2-54-224-52-189.compute-1.amazonaws.com/organizations/chef", {
+  :client_name => Chef::Config[:node_name],
+  :signing_key_filename => Chef::Config[:client_key]
+}
+
 base_port = 27020
 
-1.upto(2) do |i|
+1.upto(5) do |i|
   port = base_port + i
 
-  machine "dockerdemo_mongodb#{i}" do
-    provisioner_options 'base_image' => 'dockerdemo_mongodb_base_image',
+  machine "mongodb#{i}" do
+    provisioner_options 'base_image' => 'mongodb_base_image',
       #
       # Run the supervisor permanently after converge
       #

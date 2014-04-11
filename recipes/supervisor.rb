@@ -16,6 +16,13 @@ supervisor_service "mongodb" do
   autorestart true
 end
 
+supervisor_service "chef-client" do
+  command "/opt/chef/bin/chef-client -l info -i 300"
+  stdout_logfile "/var/log/supervisor/%(program_name)s.log"
+  stderr_logfile "/var/log/supervisor/%(program_name)s.log"
+  autorestart true
+end
+
 directory "/home/docker"
 
 user "docker" do
@@ -25,3 +32,5 @@ user "docker" do
 end
 
 execute 'echo "docker:docker" | chpasswd'
+
+execute 'sudo adduser docker sudo'
