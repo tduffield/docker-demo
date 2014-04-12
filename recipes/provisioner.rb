@@ -6,7 +6,7 @@ machine 'provisioner' do
 end
 
 machine 'provisioner' do
-  recipe 'docker'
+  #recipe 'docker'
   recipe 'docker-demo::install_metal'
   recipe 'docker-demo::ec2'
   recipe 'docker-demo::mongo_cluster'
