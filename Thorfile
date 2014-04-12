@@ -52,7 +52,7 @@ class Demo < Thor
   desc 'ec2', 'Launch EC2 demo'
   def ec2
     exec %Q(
-      chef-client -z recipes/ec2.rb recipes/mongo_cluster.rb   
+      chef-client -z recipes/ec2.rb recipes/mongo_cluster.rb
     )
   end
 

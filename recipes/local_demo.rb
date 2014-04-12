@@ -9,7 +9,7 @@ with_chef_server ENV['DOCKER_CHEF_SERVER'], {
 
 base_port = 27020
 
-1.upto(5) do |i|
+1.upto(2) do |i|
   port = base_port + i
 
   machine "mongodb#{i}" do

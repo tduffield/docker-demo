@@ -3,7 +3,7 @@ with_provisioner ChefMetalDocker::DockerProvisioner.new
 
 base_port = 27020
 
-1.upto(2) do |i|
+1.upto(3) do |i|
   port = base_port + i
 
   machine "mongodb#{i}" do
