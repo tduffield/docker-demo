@@ -4,7 +4,7 @@ ec2testdir = "#{ENV['HOME']}/ec2creds"
 
 directory ec2testdir
 
-with_fog_ec2_provisioner :ssh_username => 'ec2-user', :use_private_ip_for_ssh => true
+with_fog_ec2_provisioner :ssh_username => 'ec2-user'
 
 with_provisioner_options 'bootstrap_options' => {
     'image_id' => 'ami-2f726546',

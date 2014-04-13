@@ -1,5 +1,3 @@
-with_provisioner_options :use_private_ip_for_ssh => true
-
 1.upto(1) do |i|
   machine "cluster#{i}" do
     recipe 'docker'

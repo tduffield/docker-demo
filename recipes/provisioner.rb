@@ -1,6 +1,3 @@
-# TODO automatically detect whether we are in AWS before doing this sort of thing.
-ChefMetal.enclosing_provisioner.compute_options[:use_private_ip_for_ssh] = false
-
 credentials = ChefMetal::AWSCredentials.new
 credentials.load_default
 aws_config = <<EOM
