@@ -8,13 +8,9 @@ region=#{credentials['default'][:region]}
 EOM
 
 machine 'provisioner' do
-  file '/home/ubuntu/.aws/config', :content => aws_config
-  file '/home/ubuntu/ec2creds/dockerdemo_ssh_key', "#{ENV['HOME']}/ec2creds/dockerdemo_ssh_key"
+  file '/root/.aws/config', :content => aws_config
+  file '/root/ec2creds/dockerdemo_ssh_key', "#{ENV['HOME']}/ec2creds/dockerdemo_ssh_key"
 
-  attribute %w(build-essential compile_time), true
-
-  recipe 'apt'
-  recipe 'build-essential'
   recipe 'docker-demo::install_metal'
   recipe 'docker-demo::ec2'
   recipe 'docker-demo::mongo_cluster'
