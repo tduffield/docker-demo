@@ -28,7 +28,9 @@ base_port = 27020
           "22/tcp" => [{"HostIp" => "127.0.0.1", "HostPort" => "#{22000 + i}"}]
         }
       }
-    run_list %w(recipe[mongodb::replicaset])
+
+    recipe 'mongodb::replicaset'
+
     attribute %w(mongodb cluster_name), "docker"
     attribute %w(mongodb config replSet), "docker"
     attribute %w(mongodb config port), port
