@@ -1,8 +1,9 @@
 require 'chef_metal_docker'
 with_provisioner ChefMetalDocker::DockerProvisioner.new
 
+execute 'service docker restart'
 
-#
+
 # This is the cheaters section. Instead of building the base
 # boxes we just download them from our docker registry.
 #
@@ -19,6 +20,7 @@ if node['demo']['cheat']
 
   # There isn't a great way to rename docker containers using the LWRP
   execute 'rename_base' do
+    retries 2
     command 'docker tag chef/docker_demo_base base_image'
     action :nothing
   end
@@ -32,7 +34,7 @@ else
   # Here is where we actually build the base containers!
   docker_image 'ubuntu' do
     tag 'latest'
-    action :pull
+    action :pull_if_missing
   end
   
   # Build a base image with apt, chef, openssh and supervisord
@@ -41,7 +43,6 @@ else
   # to base_image.
   machine 'base' do
     provisioner_options 'base_image' => 'ubuntu:latest', 'command' => false
-    recipe 'apt'
     recipe 'build-essential'
     recipe 'openssh'
     recipe 'supervisor'

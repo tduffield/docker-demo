@@ -1,6 +1,3 @@
-# TODO automatically detect whether we are in AWS before doing this sort of thing.
-ChefMetal.enclosing_provisioner.compute_options[:use_private_ip_for_ssh] = false
-
 credentials = ChefMetal::AWSCredentials.new
 credentials.load_default
 aws_config = <<EOM
@@ -12,7 +9,7 @@ EOM
 
 machine 'provisioner' do
   file '/root/.aws/config', :content => aws_config
-  file '/root/ec2creds/dockerdemo_ssh_key', "#{ENV['HOME']}/ec2creds/dockerdemo_ssh_key"
+  file '/root/ec2creds/dockerdemo_ssh_key_tom', "#{ENV['HOME']}/ec2creds/dockerdemo_ssh_key_tom"
 
   recipe 'docker-demo::install_metal'
   recipe 'docker-demo::ec2'
