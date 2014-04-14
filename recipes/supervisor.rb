@@ -9,18 +9,19 @@ supervisor_service "sshd" do
   autorestart true
 end
 
-supervisor_service "mongodb" do
-  command "/usr/bin/mongod -f /etc/mongodb.conf"
-  stdout_logfile "/var/log/supervisor/%(program_name)s.log"
-  stderr_logfile "/var/log/supervisor/%(program_name)s.log"
-  autorestart true
-end
+#supervisor_service "mongodb" do
+#  command "/usr/bin/mongod -f /etc/mongodb.conf"
+#  stdout_logfile "/var/log/supervisor/%(program_name)s.log"
+#  stderr_logfile "/var/log/supervisor/%(program_name)s.log"
+#  autorestart true
+#end
 
 supervisor_service "chef-client" do
   command "/opt/chef/bin/chef-client -l info -i 300"
   stdout_logfile "/var/log/supervisor/%(program_name)s.log"
   stderr_logfile "/var/log/supervisor/%(program_name)s.log"
-  autorestart true
+  autostart false
+  autorestart false
 end
 
 directory "/home/docker"
