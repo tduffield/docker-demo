@@ -16,13 +16,13 @@ end
 #  autorestart true
 #end
 
-supervisor_service "chef-client" do
-  command "/opt/chef/bin/chef-client -l info -i 300"
-  stdout_logfile "/var/log/supervisor/%(program_name)s.log"
-  stderr_logfile "/var/log/supervisor/%(program_name)s.log"
-  autostart false
-  autorestart false
-end
+#supervisor_service "chef-client" do
+#  command "/opt/chef/bin/chef-client -l info -i 300"
+#  stdout_logfile "/var/log/supervisor/%(program_name)s.log"
+#  stderr_logfile "/var/log/supervisor/%(program_name)s.log"
+#  autostart false
+#  autorestart false
+#end
 
 directory "/home/docker"
 

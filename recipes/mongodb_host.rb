@@ -20,13 +20,15 @@ num_dbservers = 2
         'command' => 'supervisord -n',
         'container_configuration' => {
           'ExposedPorts' => {
-            "22/tcp" => {}
+            "22/tcp" => {},
+            "27017/tcp" => {}
           },
           'Tty' => true
         },
         'host_configuration' => {
           'PortBindings' => {
-            "22/tcp" => []
+            "22/tcp" => [],
+            "27017/tcp" => []
           }
         },
         'ssh_options' => {

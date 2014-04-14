@@ -27,6 +27,7 @@ machine 'mongodb' do
   recipe 'openssh'
   recipe 'docker-demo::supervisor'
   recipe 'mongodb::install'
+  recipe 'mongodb::mongo_gem'
   #notifies :push, 'docker_image[mongodb_image]', :immediately
 end
 
