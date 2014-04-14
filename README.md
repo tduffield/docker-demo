@@ -5,6 +5,30 @@
 air conditioning will fail, your refrigerator will turn off, and bacon will 
 forever taste like escargot.
 
+## Live Demo
+
+### Step Zero: Launch EC2 Instances (done beforehand)
+
+    chef-client -z recipes/create_provisioner.rb
+    chef-client -z recipes/create_mongohost_ec2.rb
+
+### Step One: Create container image
+
+    knife node run_list add provisioner recipe[docker-demo::create_mongodb_image]
+
+### Step Two: Create host environment
+
+    knife node run_list add provisioner recipe[docker-demo::create_mongodb_host]
+
+### Step Two and 1/2: Save image to Docker Index (Beforehand)
+
+    docker tag mongodb_image chef/mongodb_image
+    docker push chef/mongodb_image
+
+### Step Three: Launch MongoDB Containers
+
+    knife node run_list add mongodb_host recipe[docker-demo::mongodb_host] 
+
 ## Running the Local Demo on a Mac
 *The local demo is designed to run on a Mac running boot2docker*
 

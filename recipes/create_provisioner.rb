@@ -33,5 +33,5 @@ machine 'provisioner' do
   file '/root/.aws/config', :content => aws_config
   file '/root/ec2creds/dockerdemo_ssh_key', "#{ENV['HOME']}/ec2creds/dockerdemo_ssh_key"
 
-  recipe 'docker-demo::provisioner'
+  recipe 'docker-demo::install_chef_metal'
 end
